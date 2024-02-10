@@ -25,13 +25,15 @@ def input_image_details(uploaded_file):
 
         image_parts = [
             {
-                "mimeType": uploaded_file.type, # Get the mime type of the uploaded file
+                "mime_type": uploaded_file.type,  # Get the mime type of the uploaded file
                 "data": bytes_data
             }
         ]
         return image_parts
     else:
         raise FileNotFoundError("No file uploaded")
+
+
 # Initialize our Streamlit app
 
 st.set_page_config(page_title="MultiLanguage Invoice Extractor")
@@ -52,6 +54,6 @@ to answer any questions based on the uploaded invoice image"""
 
 if submit:
     image_data = input_image_details(uploaded_file)
-    responses = get_gemini_response(input_prompt, image_data, input)
+    response = get_gemini_response(input_prompt, image_data, input)
     st.subheader("The Response is: ")
-    st.write(responses)
+    st.write(response)
